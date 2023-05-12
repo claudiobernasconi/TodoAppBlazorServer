@@ -38,6 +38,10 @@ a, .btn-link {
     color: red;
 }
 
+.item-completed {
+    text-decoration: line-through;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
