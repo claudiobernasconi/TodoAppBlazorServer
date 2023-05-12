@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using TodoAppBlazorServer.Services;
+@inject ITodoService _todoService;
 
 <PageTitle>Todo List</PageTitle>
 
@@ -18,8 +20,7 @@
 
     protected override void OnInitialized()
     {
-        Todos.Add(new TodoItem("Wash Clothes"));
-        Todos.Add(new TodoItem("Clean Desk"));
+        Todos = _todoService.GetAll().ToList();
     }
 
     public string ItemClass(TodoItem item)
