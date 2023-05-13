@@ -26,4 +26,14 @@ public class TodoService : ITodoService
     {
         _todoItems.Remove(item);
     }
+
+    public void Complete(TodoItem item)
+    {
+        item.Completed = true;
+    }
+
+    public void Uncomplete(TodoItem item)
+    {
+        item.Completed = false;
+    }
 }
