@@ -21,4 +21,9 @@ public class TodoService : ITodoService
     {
         return _todoItems.ToList();
     }
+
+    public void Delete(TodoItem item)
+    {
+        _todoItems.Remove(item);
+    }
 }

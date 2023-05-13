@@ -4,12 +4,22 @@
 
 <PageTitle>Todo List</PageTitle>
 
+<div class="border" style="padding: 20px;">
+    <h4>New Item</h4>
+    <TodoItemForm OnItemAdded="@ItemsChanged" />
+</div>
+
 <div class="border" style="padding: 20px; margin-top: 20px;">
     <div style="display: flex; flex-direction: column">
         @foreach (var todo in Todos)
         {
-            <div style="display: flex; align-items: center;margin-bottom: 10px;">
-                <div class="@ItemClass(todo)" style="width: 280px;">@todo.Text</div>
+            <div style="display: flex; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center;margin-bottom: 10px;">
+                    <div class="@ItemClass(todo)" style="width: 280px;">@todo.Text</div>
+                </div>
+                <div>
+                    <button class="btn btn-danger" onclick="@(() => DeleteItem(todo))">Delete</button>
+                </div>
             </div>
         }
     </div>
@@ -26,5 +36,17 @@
     public string ItemClass(TodoItem item)
     {
         return item.Completed ? "item-completed" : "";
+    }
+
+    public void ItemsChanged()
+    {
+        Todos = _todoService.GetAll().ToList();
+        StateHasChanged();
+    }
+
+    public void DeleteItem(TodoItem item)
+    {
+        _todoService.Delete(item);
+        ItemsChanged();
     }
 }
